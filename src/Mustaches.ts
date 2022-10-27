@@ -10,6 +10,7 @@ import processPlaceholders, { buildUpdates } from './documentProcessing'
 import { Placeholder } from './documentProcessing/types'
 import { GDoc, Request } from './documentProcessing/gdocTypes'
 import apis, { multipart } from './apis'
+import Blob from './polyfills/Blob'
 
 class Mustaches {
   apis: any
@@ -29,8 +30,7 @@ class Mustaches {
     // If no destination given, use same folder as source
     destination = destination || (await this.getParent(source))
 
-    const copyOptions: any = { supportsAllDrives: true }
-    if (name) copyOptions.name = name
+    let copyOptions: any = name ? { name } : {}
 
     // Copy template to destination
     const copiedFile: ID = await this.copyFile(source, destination, copyOptions)

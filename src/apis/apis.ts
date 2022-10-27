@@ -13,7 +13,8 @@ const apis = (token: Function): { [api: string]: { [method: string]: Function } 
     drive: {
       create: (...args: any[]) => f(`${DRIVE_UPLOAD_URL}?uploadType=multipart&alt=json`, ...args),
       get: (id: ID, ...args: any[]) => f(`${DRIVE_URL}/${id}?fields=parents`, ...args),
-      copy: (id: ID, ...args: any[]) => f(`${DRIVE_URL}/${id}/copy`, ...args),
+      copy: (id: ID, ...args: any[]) =>
+        f(`${DRIVE_URL}/${id}/copy?supportsAllDrives=true`, ...args),
       export: (id: ID, mimeType: MimeType, ...args: any[]) =>
         f(`${DRIVE_URL}/${id}/export?mimeType=${mimeType}`, ...args)
       // ids: (count: number, ...args: any[]) => f(`${DRIVE_URL}/generateIds?count=${count}`, ...args)
